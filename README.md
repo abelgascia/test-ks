@@ -18,6 +18,10 @@ Este proyecto es una prueba hecha para la empresa KeepSmiling. El objetivo fue c
 
 ## Comandos disponibles
 
+### `npm install`
+
+Comando fundamental para instalar todas las dependencias del proyecto.
+
 ### `npm start`
 
 Inicia la aplicación en modo desarrollo en [http://localhost:3000](http://localhost:3000).
