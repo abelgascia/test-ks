@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import returnStoreAndPersistor from "./redux/store";
 
-function App() {
+import Index from "./pages/index";
+import Edit from "./pages/edit";
+
+/**
+ * Componente principal que contiene toda la aplicación.
+ * @author Abel Gascia <https://github.com/abelgascia>
+ */
+const App = () => {
+  const { store, persistor } = returnStoreAndPersistor();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    /** Componente contenedor para el acceso de los componentes hijos a la store de Redux y la persistencia de la misma. */
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Index} />
+            <Route exact path="/edit/:name" component={Edit} />
+          </Switch>
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
   );
-}
+};
 
 export default App;
